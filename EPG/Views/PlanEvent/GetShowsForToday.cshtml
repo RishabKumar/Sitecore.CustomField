@@ -1,0 +1,141 @@
+﻿@model List<EPG.Models.PlanEvent>
+
+<style>
+    .outer {
+        width: 800px;
+        overflow: auto;
+        margin: 0 auto;
+        border: 2px solid #000;
+        white-space: nowrap;
+    }
+
+    .seekbar{
+        height: 7px;
+        border: 1px solid #000;
+        width: 800px;
+        margin: 0 auto;
+    }
+
+        .outer ul {
+          margin-left:0;margin-right:0;padding:0;display:table;
+        }
+
+        .outer li {
+            display: inline-block;
+            vertical-align: top;
+            width: 100px;margin:0;
+            background: gray;
+            border: 1px solid #000;
+            white-space: normal;
+            min-height:180px;
+        }
+
+    .inner img {
+       max-width:100%;
+    }
+
+    span {
+        display: block;
+       
+    }
+</style>
+
+<div class="epg-main">
+
+    <div class="seekbar">
+        <canvas id="seekbar" style="width:100%"></canvas>
+    </div>
+
+   
+
+    @{
+        int i = 0;
+        string today = DateTime.Now.ToString("dd/MM/yyyy");//9/1/2015"
+        today = "31/05/2017";
+        IEnumerable<EPG.Models.PlanEvent> todaylist = Model.Where(x => DateTime.ParseExact(x.BroadcastDate, "dd/MM/yyyy", null).CompareTo(DateTime.ParseExact(today, "dd/MM/yyyy", null)) == 0);
+
+    }
+    <div id="epgshows" class="outer">
+        <ul>
+            @{
+                int totalwidth = 0;
+              }
+            
+            @foreach (var show in todaylist)
+            {
+                int d = 1;
+                Int32.TryParse(show.PlanDuration.Split(':')[0], out d);
+                i++;
+                d = d / 30 * 100;
+                totalwidth += d;
+                string width = d + "px";
+                <li style="width:@width">
+                    <div class="inner">
+                        <img src="http://headsup.boyslife.org/files/2013/05/RACE-HORSE-MOVIE.jpg" />
+                        <span>@show.PlanTime</span>
+                        <span>@show.TitleName</span>
+                        <span>@show.BroadcastDate</span>
+                    </div>
+                </li>
+          //      i = 0;
+            }
+
+        </ul>
+    </div>
+
+
+
+
+</div>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+<script>
+    var date = new Date();
+    var currentminutes = date.getHours() * 60 + date.getMinutes();
+    var percentcomplete = (currentminutes / (24 * 60)) * 100;
+    var totalwidth = @totalwidth;
+    var canvas = document.getElementById('seekbar');
+    var context = canvas.getContext('2d');
+    var a = 1;
+    setInterval(function()
+    { 
+        var date = new Date();
+        var currentminutes = date.getHours() * 60 + date.getMinutes();
+        var percentcomplete = (currentminutes / (24 * 60)) * 100;
+        // Store the current transformation matrix
+        context.save();
+        // Use the identity matrix while clearing the canvas
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        // Restore the transform
+        context.restore();
+        
+        var centerX = canvas.width * .01* percentcomplete ;
+        var centerY = 5;
+        var radius = 3;
+
+        context.beginPath();
+        context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        if(a%2 == 0)
+        {
+            context.fillStyle = 'red';
+        }
+        else{
+            context.fillStyle = 'white';
+        }
+        context.fill();
+        context.lineWidth = 2;
+        context.strokeStyle = '#003300';
+        context.stroke();
+        a++;
+    }, 700);
+
+      setInterval(function(){ 
+          var date = new Date();
+          var currentminutes = date.getHours() * 60 + date.getMinutes();
+          var percentcomplete = (currentminutes / (24 * 60)) * 100;
+          $("#epgshows").stop().animate({ scrollLeft: (totalwidth  - $("#epgshows").width()) * percentcomplete/100 }, 1500);
+      
+      }, 2000);
+
+    
+</script>
