@@ -8,11 +8,11 @@
 
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
- 
+ <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
  <script type="text/javascript">
      
         (function ($) {
-            var xmlfolderpath = "<%=xmlpath%>";
+            var xmlpath = "<%=xmlpath%>";
             var loadingimg = document.querySelector("img.loading");
            
             $.getScript("https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js", function (data, textStatus, jqxhr) {
@@ -66,7 +66,7 @@
                                     $.ajax({
                                         type: "GET",
                                         contentType: "application/json; charset=utf-8",
-                                        url: "/api/UploadThumbnail/GetXmlDataInJSON?filepath=" + xmlfolderpath + "/" + "MUTVPlan_Sample",
+                                        url: "/api/UploadThumbnail/GetXmlDataInJSON?filepath=" + xmlpath,
 
                                         dataType: "json",
                                         success: function (data) {

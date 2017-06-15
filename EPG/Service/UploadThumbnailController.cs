@@ -31,6 +31,7 @@ namespace EPG.Service
         }
 
         public Database db = Sitecore.Configuration.Factory.GetDatabase("master");
+        private string medialibrarypath = "/sitecore/media library";
 
         [HttpGet]
         public PlanEvent GetThumbnailBytes(PlanEvent obj)
@@ -295,7 +296,7 @@ namespace EPG.Service
         public string GetXmlDataInJSON()
         {
             var querystringpair = Request.GetQueryNameValuePairs().First(x => x.Key.Equals("filepath"));
-            var filepath = querystringpair.Value;
+            var filepath = medialibrarypath + querystringpair.Value;
             var xmlitem = Sitecore.Configuration.Factory.GetDatabase("master").GetItem(filepath);
             Phoenix7 obj;
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Phoenix7));

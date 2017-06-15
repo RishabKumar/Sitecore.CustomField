@@ -53,8 +53,8 @@
       <HintPath>..\packages\Glass.Mapper.Sc.4.0.11.63\lib\Mvc52\Glass.Mapper.Sc.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Buckets">
@@ -140,7 +140,15 @@
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\grid.locale-el.js" />
+    <Content Include="Content\images\arrow-left.png" />
+    <Content Include="Content\images\arrow-right.png" />
+    <Content Include="Content\images\Chrysanthemum.jpg" />
+    <Content Include="Content\images\Desert.jpg" />
+    <Content Include="Content\images\Hydrangeas.jpg" />
+    <Content Include="Content\images\Jellyfish.jpg" />
+    <Content Include="Content\images\spotlight.png" />
     <Content Include="Content\Loading_icon.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="CustomControls\XMLViewerPro.ascx" />
@@ -157,7 +165,12 @@
     <Content Include="App_Config\Include\Glass.Mapper.Sc.config" />
     <Content Include="App_Config\Include\Glass.Mapper.Sc.CodeFirst.config.exclude" />
     <Content Include="Scripts\grid.locale-el.js" />
+    <Content Include="Scripts\js\angular.min.js" />
+    <Content Include="Scripts\js\app.js" />
+    <Content Include="Scripts\js\script.js" />
+    <Content Include="Scripts\js\script2.js" />
     <Content Include="Scripts\Test.js" />
+    <Content Include="XMLFullPageViewer.aspx" />
     <Content Include="XMLViewer.ascx" />
     <Content Include="App_Config\Include\Sitecore.AntiCSRF.config" />
     <None Include="Properties\PublishProfiles\EPG.pubxml" />
@@ -176,6 +189,14 @@
     <Content Include="Views\PlanEvent\GetShowsForToday.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service\ShowsDataController.cs" />
+    <Compile Include="XMLFullPageViewer.aspx.cs">
+      <DependentUpon>XMLFullPageViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="XMLFullPageViewer.aspx.designer.cs">
+      <DependentUpon>XMLFullPageViewer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="XMLViewer.ascx.cs">
       <DependentUpon>XMLViewer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +237,8 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Web.config" />
+    <Content Include="Views\PlanEvent\CurrentWeekShows.cshtml" />
+    <Content Include="Scripts\js\program.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

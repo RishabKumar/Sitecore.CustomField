@@ -222,13 +222,11 @@
         });
 
 
-        ajaxRequest.done(function (data, textStatus, jqXHR ) {
+        ajaxRequest.done(function (data, textStatus, jqXHR) {
             // Do other operation
-           
+
 
         });
-
-       
 
     });
 
